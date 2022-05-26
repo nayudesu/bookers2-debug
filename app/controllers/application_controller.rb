@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
 
 
   def after_sign_in_path_for(resource)
-    user_path
+    user_path(resource)
   end
 
   def after_sign_out_path_for(resource)
-    root_path
+    root_path(resource)
   end
   
   protected
