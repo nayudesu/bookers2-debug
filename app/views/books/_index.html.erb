@@ -19,16 +19,21 @@
         
         <td>
           <% if book.favorited_by?(current_user) %>
-              <%= link_to book.favorites.count, book_favorites_path(book), method: :delete, class: "fas fa-heart heart_red" %>
+              <%= link_to book_favorites_path(book), method: :delete do %>
+              <i class="fas fa-heart heart_blue"></i>
+              <%= book.favorites.count %>
+
+              <% end %>
           <% else %>
-              <%= link_to book.favorites.count, book_favorites_path(book), method: :post, class: "fas fa-heart heart_blue" %>
+              <%= link_to book_favorites_path(book), method: :post do %>
+              <i class="fas fa-heart heart_red"></i>
+              <%= book.favorites.count %>
+
+              <% end %>
+            
           <% end %>
         </td>
         
-        <td>
-            コメント数：<%= book.post_comments.count %>
-        </td>
-
       </tr>
     <% end %>
   </tbody>
