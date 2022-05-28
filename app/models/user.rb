@@ -13,13 +13,14 @@ class User < ApplicationRecord
   has_many :post_comments,dependent: :destroy
   
   has_many :relationships, class_name: 'Relationship', foreign_key:"followed_id", dependent: :destroy  #followする側
-  has_many :followeds, through: :relationships, source: :follower #中間テーブルを通して、あるユーザーがフォローしている人と取り出す
+  has_many :followings, through: :relationships, source: :follower #中間テーブルを通して、あるユーザーがフォローしている人と取り出す
   
   has_many :reverse_of_relationships, class_name: 'Relationship', foreign_key:"follower_id", dependent: :destroy
-  has_many :followings, through: :reverse_of_relationships, source: :followed
+  has_many :followers, through: :reverse_of_relationships, source: :followed
 
   validates :name, length: { minimum: 2, maximum: 20 }, uniqueness: true
   validates :introduction, length: { maximum: 50} #23
+
 
   # フォローしたときの処理
   def follow(user_id)
