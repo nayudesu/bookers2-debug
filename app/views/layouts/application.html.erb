@@ -10,9 +10,10 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <center><%= render 'layouts/search' %></center>
       <main>
         <p id="notice"><%= notice %></p>
+        <center><%= render 'layouts/search' %></center>
+
         <%= yield %>
       </main>
     <%= render 'layouts/footer' %>
