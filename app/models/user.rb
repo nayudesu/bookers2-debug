@@ -40,18 +40,18 @@ class User < ApplicationRecord
   end
   
   # 検索方法分岐
-  def self.search_for(search, word)
+  def self.looks(search, word)
     if search == "perfect_match" #完全一致
-      User.where("name LIKE?", "#{word}") ##whereを使いdbから該当データを取得し、変数に代入
+      @user = User.where("name LIKE?", "#{word}") ##whereを使いdbから該当データを取得し、変数に代入
     elsif search == "forward_match" #前方一致
-      User.where("name LIKE?","#{word}%") #完全一致以外の検索方法
+      @user = User.where("name LIKE?","#{word}%") #完全一致以外の検索方法
 　　　#{word}の前後(もしくは両方に)、%を追記することで定義することができる
     elsif search == "backward_match" #後方一致
-      User.where("name LIKE?","%#{word}")
+      @user = User.where("name LIKE?","%#{word}")
     elsif search == "partial_match" #部分一致
-      User.where("name LIKE?","%#{word}%")
+      @user = User.where("name LIKE?","%#{word}%")
     else
-      User.all
+      @user = User.all
     end
   end
   
